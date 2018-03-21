@@ -1,0 +1,48 @@
+﻿@model VollyTest.Models.Organization
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Organization</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteersNeeded)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VolunteersNeeded)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PoliceCheckRequired)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PoliceCheckRequired)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

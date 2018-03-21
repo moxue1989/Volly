@@ -1,0 +1,67 @@
+﻿@using VollyTest.Models.ViewModels
+@model OpportunityView
+
+@{
+    ViewData["Title"] = "Create";
+    OpportunityCreate createModel = ViewData["create"] as OpportunityCreate;
+}
+
+<h2>Create</h2>
+
+<h4>Opportunity</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control"
+                        asp-items="@createModel?.Categories">
+                    <option value="">-- Select Category --</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrganizationId" class="control-label"></label>
+                <select asp-for="OrganizationId" class="form-control"
+                        asp-items="@createModel?.Organizations">
+                    <option value="">-- Select Organization --</option>
+                </select>
+                <span asp-validation-for="OrganizationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerTypeId" class="control-label"></label>
+                <select asp-for="VolunteerTypeId" class="form-control"
+                        asp-items="@createModel?.VolunteerTypes">
+                    <option value="">-- Select Volunteer Type --</option>
+                </select>
+                <span asp-validation-for="VolunteerTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SkillRequiredId" class="control-label"></label>
+                <select asp-for="SkillRequiredId" class="form-control"
+                        asp-items="@createModel?.Skills">
+                    <option value="">-- Select Skill --</option>
+                </select>
+                <span asp-validation-for="SkillRequiredId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
