@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -79,10 +77,12 @@ namespace VollyTest.Controllers.Mvc
                 Opportunity newOpportunity = new Opportunity()
                 {
                     Name = opportunityView.Name,
+                    Description = opportunityView.Description,
                     SkillRequired = _context.Skills.Find(opportunityView.SkillRequiredId),
                     Category = _context.Categories.Find(opportunityView.CategoryId),
                     Organization = _context.Organizations.Find(opportunityView.OrganizationId),
-                    VolunteerType = _context.VolunteerTypes.Find(opportunityView.VolunteerTypeId)
+                    VolunteerType = _context.VolunteerTypes.Find(opportunityView.VolunteerTypeId),
+                    DateTime = opportunityView.DateTime
                 };
 
                 _context.Add(newOpportunity);

@@ -11,36 +11,15 @@ using VollyTest.Models;
 namespace VollyTest.Migrations
 {
     [DbContext(typeof(VollyModel))]
-    partial class VollyModelModelSnapshot : ModelSnapshot
+    [Migration("20180322010209_modify-organizations")]
+    partial class modifyorganizations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("VollyTest.Models.Application", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Message");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int?>("OpportunityId");
-
-                    b.Property<bool>("PoliceRecord");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OpportunityId");
-
-                    b.ToTable("Applications");
-                });
 
             modelBuilder.Entity("VollyTest.Models.Category", b =>
                 {
@@ -60,10 +39,6 @@ namespace VollyTest.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("CategoryId");
-
-                    b.Property<DateTime>("DateTime");
-
-                    b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
@@ -150,13 +125,6 @@ namespace VollyTest.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("VolunteerTypes");
-                });
-
-            modelBuilder.Entity("VollyTest.Models.Application", b =>
-                {
-                    b.HasOne("VollyTest.Models.Opportunity", "Opportunity")
-                        .WithMany()
-                        .HasForeignKey("OpportunityId");
                 });
 
             modelBuilder.Entity("VollyTest.Models.Opportunity", b =>

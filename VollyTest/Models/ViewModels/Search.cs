@@ -9,5 +9,6 @@ namespace VollyTest.Models.ViewModels
     {
         public List<int> SkillIDs { get; set; }
         public List<int> CategoryIDs { get; set; }
+        public List<int> Weekdays { get; set; }
     }
 }

@@ -7,9 +7,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20180317185828_testing.cs" />
     <Compile Remove="Migrations\20180317185828_testing.Designer.cs" />
+    <Compile Remove="Migrations\20180328021153_rename-application.cs" />
+    <Compile Remove="Migrations\20180328021153_rename-application.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="7.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />

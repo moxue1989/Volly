@@ -31,6 +31,10 @@ namespace VollyTest.Controllers.Api
                 SkillIDs = new List<int>()
                 {
                     1,2,3
+                }, 
+                Weekdays = new List<int>()
+                {
+                    0,6
                 }
             };
         }
@@ -39,8 +43,9 @@ namespace VollyTest.Controllers.Api
         public IEnumerable<Opportunity> SearchOpportunities([FromBody] Search search)
         {
             return _context.Opportunities
-                .Where(opp => search.SkillIDs.Contains(opp.SkillRequired.Id) ||
-                 search.CategoryIDs.Contains(opp.Category.Id))
+                .Where(opp => search.SkillIDs.Contains(opp.SkillRequired.Id) &&
+                 search.CategoryIDs.Contains(opp.Category.Id) && 
+                 search.Weekdays.Contains((int)opp.DateTime.DayOfWeek))
                 .Include(o => o.Category)
                 .Include(o => o.Organization)
                 .Include(o => o.SkillRequired)

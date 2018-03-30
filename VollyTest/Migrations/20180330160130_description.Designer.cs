@@ -11,9 +11,10 @@ using VollyTest.Models;
 namespace VollyTest.Migrations
 {
     [DbContext(typeof(VollyModel))]
-    partial class VollyModelModelSnapshot : ModelSnapshot
+    [Migration("20180330160130_description")]
+    partial class description
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -13,6 +13,7 @@ namespace VollyTest
 {
     public class Startup
     {
+        //private static readonly string FromEmail = Environment.GetEnvironmentVariable("Conne")
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

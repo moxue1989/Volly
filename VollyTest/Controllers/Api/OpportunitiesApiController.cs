@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VollyTest.Models;
@@ -27,7 +26,27 @@ namespace VollyTest.Controllers.Api
         [HttpGet]
         public IEnumerable<Opportunity> GetOpportunities()
         {
-            return _context.Opportunities;
+            return _context.Opportunities
+                .Include(o => o.Category)
+                .Include(o => o.Organization)
+                .Include(o => o.SkillRequired)
+                .Include(o => o.VolunteerType);
+        }
+
+        [HttpGet]
+        [Route("/api/Opportunities/Post")]
+        public OpportunityView GetOpportunityView()
+        {
+            return new OpportunityView()
+            {
+                Name = "Opportunity",
+                Description = "description of this opportunity",
+                CategoryId = 1,
+                DateTime = DateTime.Now,
+                OrganizationId = 2,
+                SkillRequiredId = 3,
+                VolunteerTypeId = 4
+            };
         }
 
         // GET: api/Opportunities/5
@@ -101,10 +120,12 @@ namespace VollyTest.Controllers.Api
             Opportunity newOpportunity = new Opportunity
             {
                 Name = opportunityView.Name,
+                Description = opportunityView.Description,
                 SkillRequired = _context.Skills.Find(opportunityView.SkillRequiredId),
                 Category = _context.Categories.Find(opportunityView.CategoryId),
                 Organization = _context.Organizations.Find(opportunityView.OrganizationId),
-                VolunteerType = _context.VolunteerTypes.Find(opportunityView.VolunteerTypeId)
+                VolunteerType = _context.VolunteerTypes.Find(opportunityView.VolunteerTypeId),
+                DateTime = opportunityView.DateTime
             };
 
             _context.Opportunities.Add(newOpportunity);

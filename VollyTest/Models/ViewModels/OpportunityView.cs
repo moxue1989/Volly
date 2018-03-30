@@ -9,10 +9,12 @@ namespace VollyTest.Models.ViewModels
     public class OpportunityView
     {
         public string Name { get; set; }
+        public string Description { get; set; }
         public int OrganizationId { get; set; }
         public int CategoryId { get; set; }
         public int VolunteerTypeId { get; set; }
         public int SkillRequiredId { get; set; }
+        public DateTime DateTime { get; set; }
     }
 
     public class OpportunityCreate

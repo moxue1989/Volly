@@ -18,5 +18,6 @@ namespace VollyTest.Models
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<VolunteerType> VolunteerTypes { get; set; }
+        public DbSet<Application> Applications { get; set; }
     }
 }

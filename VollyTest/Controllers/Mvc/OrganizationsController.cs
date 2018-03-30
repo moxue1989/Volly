@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CsvHelper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VollyTest.Models;
 
@@ -24,8 +25,27 @@ namespace VollyTest.Controllers.Mvc
             return View(await _context.Organizations.ToListAsync());
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Index(IFormFile postedFile)
+        {
+            using (var reader = new StreamReader(postedFile.OpenReadStream()))
+            {
+                CsvReader csvReader = new CsvReader(reader);
+                csvReader.Configuration.MissingFieldFound = null;
+                csvReader.Configuration.HeaderValidated = null;
+                csvReader.Configuration.BadDataFound = null;
+                IEnumerable<Organization> records = csvReader.GetRecords<Organization>();
+                foreach (Organization organization in records)
+                {
+                    _context.Add(organization);
+                }
+            }
+            await _context.SaveChangesAsync();
+            return View(await _context.Organizations.ToListAsync());
+        }
+
         // GET: Organizations/Details/5
-        public async Task<IActionResult> Details(int? id)
+            public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -53,7 +73,7 @@ namespace VollyTest.Controllers.Mvc
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ContactEmail,VolunteersNeeded,Description,PoliceCheckRequired")] Organization organization)
+        public async Task<IActionResult> Create([Bind("Id,Name,ContactEmail,PhoneNumber,Address,WebsiteLink,DonateLink,MissionStatement,FullDescription")] Organization organization)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +105,7 @@ namespace VollyTest.Controllers.Mvc
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ContactEmail,VolunteersNeeded,Description,PoliceCheckRequired")] Organization organization)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ContactEmail,PhoneNumber,Address,WebsiteLink,DonateLink,MissionStatement,FullDescription")] Organization organization)
         {
             if (id != organization.Id)
             {
